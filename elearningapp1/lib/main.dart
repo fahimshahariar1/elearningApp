@@ -1,7 +1,10 @@
 import 'package:elearningapp1/app_blocs.dart';
+import 'package:elearningapp1/app_events.dart';
 import 'package:elearningapp1/app_states.dart';
+import 'package:elearningapp1/pages/welcome/welcome.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,13 +18,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => AppBlocs(),
-      child: MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
+      child: ScreenUtilInit(
+        builder: (context, child) => MaterialApp(
+          title: 'Flutter Demo',
+          theme: ThemeData(
+            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+            useMaterial3: true,
+          ),
+          home: Welcome(),
         ),
-        home: const MyHomePage(title: 'Flutter Demo Home Page'),
       ),
     );
   }
@@ -46,20 +51,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  void _decrementCounter() {
-    setState(() {
-      _counter--;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -90,7 +81,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   'You have pushed the button this many times:',
                 ),
                 Text(
-                  '$_counter',
+                  "${BlocProvider.of<AppBlocs>(context).state.counter}",
                   style: Theme.of(context).textTheme.headlineMedium,
                 ),
               ],
@@ -101,12 +92,14 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             FloatingActionButton(
-              onPressed: _incrementCounter,
+              onPressed: () =>
+                  BlocProvider.of<AppBlocs>(context).add(Increment()),
               tooltip: 'Increment',
               child: const Icon(Icons.add),
             ),
             FloatingActionButton(
-              onPressed: _decrementCounter,
+              onPressed: () =>
+                  BlocProvider.of<AppBlocs>(context).add(Decrement()),
               tooltip: 'Decrement',
               child: const Icon(Icons.remove),
             ),
