@@ -1,6 +1,7 @@
 import 'package:elearningapp1/app_blocs.dart';
 import 'package:elearningapp1/app_events.dart';
 import 'package:elearningapp1/app_states.dart';
+import 'package:elearningapp1/pages/welcome/bloc/welcome_blocs.dart';
 import 'package:elearningapp1/pages/welcome/welcome.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,10 +18,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => AppBlocs(),
+      create: (context) => WelcomeBlocs(),
       child: ScreenUtilInit(
         builder: (context, child) => MaterialApp(
-          title: 'Flutter Demo',
           theme: ThemeData(
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
             useMaterial3: true,
