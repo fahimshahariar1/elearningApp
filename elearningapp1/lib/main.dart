@@ -1,6 +1,7 @@
 import 'package:elearningapp1/app_blocs.dart';
 import 'package:elearningapp1/app_events.dart';
 import 'package:elearningapp1/app_states.dart';
+import 'package:elearningapp1/pages/sign_in/sign_in.dart';
 import 'package:elearningapp1/pages/welcome/bloc/welcome_blocs.dart';
 import 'package:elearningapp1/pages/welcome/welcome.dart';
 import 'package:flutter/material.dart';
@@ -17,15 +18,27 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => WelcomeBlocs(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => WelcomeBlocs(),
+        ),
+        BlocProvider(
+          create: (context) => AppBlocs(),
+        )
+      ],
       child: ScreenUtilInit(
         builder: (context, child) => MaterialApp(
+          debugShowCheckedModeBanner: false,
           theme: ThemeData(
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
             useMaterial3: true,
           ),
-          home: Welcome(),
+          home: const Welcome(),
+          routes: {
+            "myHomePage":(context)=> const MyHomePage(),
+            "signIn":(context)=> const SignIn(),
+          },
         ),
       ),
     );
@@ -33,6 +46,8 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key});
+
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
   // how it looks.
@@ -87,12 +102,14 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             FloatingActionButton(
+              heroTag: "heroTag1",
               onPressed: () =>
                   BlocProvider.of<AppBlocs>(context).add(Increment()),
               tooltip: 'Increment',
               child: const Icon(Icons.add),
             ),
             FloatingActionButton(
+              heroTag: "heroTag2",
               onPressed: () =>
                   BlocProvider.of<AppBlocs>(context).add(Decrement()),
               tooltip: 'Decrement',

@@ -1,7 +1,5 @@
 import 'package:dots_indicator/dots_indicator.dart';
-import 'package:elearningapp1/main.dart';
 import 'package:elearningapp1/pages/welcome/bloc/welcome_events.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -70,8 +68,8 @@ class _WelcomeState extends State<Welcome> {
                       dotsCount: 3,
                       decorator: DotsDecorator(
                           color: Colors.grey,
-                          size: Size.square(8),
-                          activeSize: Size(10, 8),
+                          size: const Size.square(8),
+                          activeSize: const Size(10, 8),
                           activeColor: Colors.blue,
                           activeShape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(5))),
@@ -98,14 +96,12 @@ class _WelcomeState extends State<Welcome> {
             fit: BoxFit.cover,
           ),
         ),
-        Container(
-          child: Text(
-            title,
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 24.sp,
-              fontWeight: FontWeight.normal,
-            ),
+        Text(
+          title,
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 24.sp,
+            fontWeight: FontWeight.normal,
           ),
         ),
         Container(
@@ -126,12 +122,9 @@ class _WelcomeState extends State<Welcome> {
                   duration: const Duration(milliseconds: 500),
                   curve: Curves.decelerate);
             } else {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => MyHomePage(),
-                ),
-              );
+              Navigator.pushNamedAndRemoveUntil(context, "signIn", (route) => false);
+
+
             }
           },
           child: Container(
@@ -146,7 +139,7 @@ class _WelcomeState extends State<Welcome> {
                       color: Colors.grey.withOpacity(0.1),
                       spreadRadius: 1,
                       blurRadius: 2,
-                      offset: Offset(0, 1))
+                      offset: const Offset(0, 1))
                 ]),
             child: Center(
               child: Text(
