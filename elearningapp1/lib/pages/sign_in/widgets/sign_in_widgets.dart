@@ -64,6 +64,7 @@ Widget buildtextfield(String hintText, String textType, String iconName){
   return Container(
     width:325.w,
     height: 50.h,
+    margin: EdgeInsets.only(bottom: 20.h),
     decoration: BoxDecoration(
       color: Colors.white,
       borderRadius: BorderRadius.circular(15),
@@ -114,9 +115,60 @@ Widget buildtextfield(String hintText, String textType, String iconName){
               fontWeight: FontWeight.normal,
               fontSize: 14.sp
             ),
+            autocorrect: false,
+            obscureText: textType=="pass"?true:false,
           ),
         )
       ],
+    ),
+  );
+}
+
+Widget forgotPass(){
+  return Container(
+    margin: EdgeInsets.only(left: 25.w),
+    width: 260.w,
+    height: 44.h,
+    child: GestureDetector(
+      onTap: (){
+
+      },
+      child: const Text("Forgot Password?", style: TextStyle(
+        fontWeight: FontWeight.bold,
+        color: Colors.black,
+        decoration: TextDecoration.underline,
+        decorationColor: Colors.blue,
+      ),),
+    ),
+  );
+}
+
+Widget buildloginandRegButton(String buttonName, String buttonType){
+  return GestureDetector(
+    onTap: (){
+
+    },
+    child: Container(
+      margin: EdgeInsets.only(left: 25.w, right: 25.w, top: buttonType == "login"?4.h:20.h),
+      width: 325.w,
+    height: 50.h,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(15),
+        color: buttonType =="login"? Colors.blue:Colors.white,
+        boxShadow: [
+          BoxShadow(
+            spreadRadius: 1,
+            blurRadius: 2,
+            offset: Offset(1, 1),
+            color: Colors.grey.withOpacity(0.1),
+          )
+        ]
+      ),
+      child: Center(child: Text(buttonName, style: TextStyle(
+        fontWeight: FontWeight.normal,
+        fontSize: 16.sp,
+        color: buttonType=="login"?Colors.white:Colors.black
+      ),)),
     ),
   );
 }
