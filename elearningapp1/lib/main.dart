@@ -1,6 +1,8 @@
 import 'package:elearningapp1/app_blocs.dart';
 import 'package:elearningapp1/app_events.dart';
 import 'package:elearningapp1/app_states.dart';
+import 'package:elearningapp1/pages/blocProviders.dart';
+import 'package:elearningapp1/pages/register/register.dart';
 import 'package:elearningapp1/pages/sign_in/bloc/sign_in_blocs.dart';
 import 'package:elearningapp1/pages/sign_in/sign_in.dart';
 import 'package:elearningapp1/pages/welcome/bloc/welcome_blocs.dart';
@@ -26,15 +28,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (context) => WelcomeBlocs(),
-        ),
-        BlocProvider(
-          create: (context) => AppBlocs(),
-        ),
-        BlocProvider(create: (context)=> SignInBloc()),
-      ],
+      providers: AppBlocProviders.allBlocProviders,
+
       child: ScreenUtilInit(
         builder: (context, child) => MaterialApp(
           debugShowCheckedModeBanner: false,
@@ -46,6 +41,7 @@ class MyApp extends StatelessWidget {
           routes: {
             "myHomePage":(context)=> const MyHomePage(),
             "signIn":(context)=> const SignIn(),
+            "register": (context)=> const Register(),
           },
         ),
       ),

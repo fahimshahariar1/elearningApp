@@ -1,10 +1,11 @@
 import 'package:elearningapp1/pages/sign_in/bloc/sign_in_blocs.dart';
 import 'package:elearningapp1/pages/sign_in/bloc/sign_in_states.dart';
-import 'package:elearningapp1/pages/sign_in/widgets/sign_in_widgets.dart';
+import 'package:elearningapp1/pages/sign_in/sign_in_controller.dart';
+//import 'package:elearningapp1/pages/sign_in/widgets/sign_in_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
+import '../commonwidgets.dart';
 import 'bloc/sign_in_events.dart';
 
 class SignIn extends StatefulWidget {
@@ -23,7 +24,7 @@ class _SignInState extends State<SignIn> {
           color: Colors.white,
           child: SafeArea(
             child: Scaffold(
-              appBar: buildAppbar(),
+              appBar: buildAppbar("Log In"),
               body: SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -60,8 +61,12 @@ class _SignInState extends State<SignIn> {
                       ),
                     ),
                     forgotPass(),
-                    buildloginandRegButton("Log In", "login"),
-                    buildloginandRegButton("Register", "reg"),
+                    buildloginandRegButton("Log In", "login", () {
+                      SignInController(context: context).handleSignIn("email");
+                    }),
+                    buildloginandRegButton("Sign Up", "reg", () {
+                      Navigator.pushNamed(context, "register");
+                    }),
                   ],
                 ),
               ),
