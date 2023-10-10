@@ -1,6 +1,7 @@
 import 'package:elearningapp1/app_blocs.dart';
 import 'package:elearningapp1/app_events.dart';
 import 'package:elearningapp1/app_states.dart';
+import 'package:elearningapp1/pages/application/application_page.dart';
 import 'package:elearningapp1/pages/blocProviders.dart';
 import 'package:elearningapp1/pages/register/register.dart';
 import 'package:elearningapp1/pages/sign_in/bloc/sign_in_blocs.dart';
@@ -37,7 +38,7 @@ class MyApp extends StatelessWidget {
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
             useMaterial3: true,
           ),
-          home: const Welcome(),
+          home: const ApplicationPage(),
           routes: {
             "myHomePage":(context)=> const MyHomePage(),
             "signIn":(context)=> const SignIn(),
