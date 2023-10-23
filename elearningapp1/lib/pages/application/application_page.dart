@@ -24,7 +24,7 @@ class _ApplicationPageState extends State<ApplicationPage> {
             height: 58.h,
             width: 375.w,
             decoration: BoxDecoration(
-              color: AppColors.primaryElement,
+              // color: AppColors.primaryElement,
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(20.h),
                 topRight: Radius.circular(20.h)
